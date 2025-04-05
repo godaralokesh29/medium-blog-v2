@@ -5,6 +5,7 @@ import { sign } from "hono/jwt";
 
 export const userRouter = new Hono<{
   Bindings: {
+    //typescript doesnt read what you have in wrangler.toml  so we need to expicitly define the types here
     DATABASE_URL: string;
     JWT_SECRET: string;
   };
@@ -17,18 +18,22 @@ userRouter.post("/signup", async (c) => {
 
   const body = await c.req.json();
 
-  const user = await prisma.user.create({
-    data: {
-      email: body.email,
-      password: body.password,
-    },
-  });
+  let user;
+  try {
+    user = await prisma.user.create({
+      data: {
+        email: body.email,
+        password: body.password,
+      },
+    });
+  } catch (e) {
+    c.status(403);
+    return c.json({ error: "user already exists" });
+  }
 
   const token = await sign({ id: user.id }, c.env.JWT_SECRET);
 
-  return c.json({
-    jwt: token,
-  });
+  return c.json({ token });
 });
 
 userRouter.post("/signin", async (c) => {

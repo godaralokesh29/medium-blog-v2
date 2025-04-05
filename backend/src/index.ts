@@ -10,6 +10,6 @@ export const app = new Hono<{
 }>();
 
 app.route('/api/v1/user', userRouter)
-app.route('/api/v1/book', bookRouter)
+app.route('/api/v1/blog', bookRouter)
 
 export default app
