@@ -1,4 +1,4 @@
-# 📝 Medium Blog v2
+# 📝 Blogo
 
 A modern **blogging platform** built using **serverless architecture**, **PostgreSQL**, **Prisma ORM**, and the blazing-fast **Hono.js** framework. Backend is deployed on **Cloudflare Workers** and powered by **Prisma Accelerate** for optimized performance. The frontend is crafted in **TypeScript + React**.
 
@@ -9,7 +9,8 @@ A modern **blogging platform** built using **serverless architecture**, **Postgr
 ## 🚀 Live API
 
 **Backend URL:**  
-[https://backend.mediummmmmmmmmmmm.workers.dev/](https://backend.mediummmmmmmmmmmm.workers.dev/)
+[https://backend.mediummmmmmmmmmmm.workers.dev/](https://backend.mediummmmmmmmmmmm.workers.dev/)  
+this is Backend API on which code is deployed !! used in  frontedn
 
 ---
 
@@ -26,7 +27,7 @@ A modern **blogging platform** built using **serverless architecture**, **Postgr
 ### Frontend
 - ⚛️ React
 - 🧑‍💻 TypeScript
-- 🪄 TailwindCSS (if used)
+- 🪄 TailwindCSS 
 
 ---
 
