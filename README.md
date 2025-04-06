@@ -2,7 +2,7 @@
 
 A modern **blogging platform** built using **serverless architecture**, **PostgreSQL**, **Prisma ORM**, and the blazing-fast **Hono.js** framework. Backend is deployed on **Cloudflare Workers** and powered by **Prisma Accelerate** for optimized performance. The frontend is crafted in **TypeScript + React**.
 
-> Powered by [@godara_29/medium-blog-v2](https://www.npmjs.com/package/@godara_29/medium-blog-v2)
+> Powered by [@godara_29/medium-blog-v2](https://www.npmjs.com/package/@godara_29/medium-common-v2)
 
 ---
 
