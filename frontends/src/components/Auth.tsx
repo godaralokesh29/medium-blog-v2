@@ -35,7 +35,7 @@ navigate("/blogs");
       <div className="max-w-md w-full space-y-8 animate-fade-in">
         <div className="text-center">
           <h1 className="text-4xl font-extrabold text-[var(--foreground)]">
-            Welcome to Medium
+            Welcome to Tech Talks
           </h1>
           <h2 className="mt-2 text-2xl font-bold text-[var(--foreground)]">
             {type === "signin" ? "Sign in to your account" : "Create your account"}
