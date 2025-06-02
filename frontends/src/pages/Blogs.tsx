@@ -32,8 +32,8 @@ export const Blogs = () => {
        <Appbar />
       <div  className="flex justify-center">
         <div className="">
-        {blogs.map(blog => <BlogCard 
-         id={Number(blog.id)}
+        {Array.isArray(blogs) && blogs.map(blog => <BlogCard 
+         id={blog.id}
          authorname ={blog.author.name || "lokesh"}
          title={blog.title}
          content={blog.content}

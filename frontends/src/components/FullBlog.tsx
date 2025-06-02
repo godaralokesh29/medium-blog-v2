@@ -3,6 +3,16 @@ import { Appbar } from "./Appbar";
 import { Avatar } from "./BlogCard";
 
 export const FullBlog = ({ blog }: { blog: Blog }) => {
+  if (!blog || !blog.author) {
+    return (
+      <div>
+        <Appbar />
+        <div className="flex justify-center items-center h-screen">
+          <div className="text-xl text-gray-500">Blog not found or loading...</div>
+        </div>
+      </div>
+    );
+  }
   return (
     <div>
       <Appbar />

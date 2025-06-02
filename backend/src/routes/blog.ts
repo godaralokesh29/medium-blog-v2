@@ -53,7 +53,7 @@ bookRouter.post("/", async (c) => {
       title: body.title,
       content: body.content,
 	  // @ts-ignore
-      authorId: Number(authorId),
+      authorId: String(authorId),
     },
   });
 
@@ -117,7 +117,7 @@ bookRouter.get('/:id', async (c) => {
     const post = await prisma.post.findFirst({
       where: {
 		//@ts-ignore
-        id:Number(id),
+        id: String(id),
       },
       select:{
         id:true,

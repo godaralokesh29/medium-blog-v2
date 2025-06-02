@@ -3,32 +3,35 @@ import { useState } from "react"
 import axios from "axios"
 import { BACKEND_URL } from "../config"
 
-interface Blog {
+export interface Blog {
     id: string
     title: string   
     content: string
     author: {
         name: string
     }
-
 }
 
 export const useBlog=({id} : {id :string}) => {
      const [loading, setLoading] = useState(true)
-    const [blog, setBlog] = useState<Blog>()
+    const [blog, setBlog] = useState<Blog | undefined>()
 
     useEffect(() => {
-        axios.get(`${BACKEND_URL}/api/v1/blog${id}`,{
+        axios.get(`${BACKEND_URL}/api/v1/blog/${id}`,{
             headers: {
                 Authorization: localStorage.getItem("token")
             }
         })
         .then((res) => {
-            setBlog(res.data.blog)
+            setBlog(res.data.post)
             setLoading(false)
         })
+        .catch(() => {
+            setBlog(undefined);
+            setLoading(false)    
+ })
 
-    },[])
+    },[id])
 
     return {
         loading,
@@ -50,10 +53,13 @@ export const useBlogs = () => {
             }
         })
         .then((res) => {
-            setBlogs(res.data.blogs)
+            setBlogs(res.data.posts || []);
             setLoading(false)
         })
-
+        .catch(() => {
+            setBlogs([]);
+            setLoading(false);
+        });
     },[])
 
     return {
