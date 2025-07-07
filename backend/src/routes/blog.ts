@@ -21,25 +21,34 @@ export const bookRouter = new Hono<{
 bookRouter.use("/*",async (c, next) => {
   //this will get the userId from the token and set it in the context
   //and will pass it to the below routes
-  const jwt = c.req.header("Authorization");
- try{ if (!jwt) {
-    c.status(401);
-    return c.json({ error: "unauthorized" });
-  }
-  const user = await verify(jwt, c.env.JWT_SECRET);
-  if (!user) {
-    c.status(401);
-    return c.json({ error: "unauthorized" });
-  }
+  const jwtHeader = c.req.header("Authorization");
+  console.log("JWT header received:", jwtHeader);
+  console.log("JWT_SECRET in env:", c.env.JWT_SECRET);
 
-  
-  // @ts-ignore
-  c.set("userId", user.id);
-  await next();}catch(e){
-	c.status(401);
-	return c.json({ error: "you are not logged in" });
+  // FIX: Remove 'Bearer ' prefix if present
+  const jwt = jwtHeader?.startsWith("Bearer ") ? jwtHeader.slice(7) : jwtHeader;
+
+  try {
+    if (!jwt) {
+      c.status(401);
+      return c.json({ error: "unauthorized" });
+    }
+    const user = await verify(jwt, c.env.JWT_SECRET);
+    console.log("User after verify:", user);
+    if (!user) {
+      c.status(401);
+      return c.json({ error: "unauthorized" });
+    }
+    //@ts-ignore
+    c.set("userId", user.id);
+    await next();
+  } catch (e) {
+    console.log("JWT verification error:", e);
+    c.status(401);
+    return c.json({ error: "you are not logged in" });
   }
 });
+
 
 bookRouter.post("/", async (c) => {
   const body = await c.req.json();
